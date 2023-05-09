@@ -68,10 +68,10 @@ int main()
     int TERM = 0;
     std::promise<double> Promise;
 
-    auto func = [&]{
+    auto func = [&]{    
         try{
             double ans = CalculatePI(TERM);
-            Promise.set_value(ans);
+            Promise.set_value(ans); // set value at future object 
         }
         catch(...)
         {
@@ -79,13 +79,13 @@ int main()
         }
     };
     
-    std::future<double> Future = Promise.get_future();
+    std::future<double> Future = Promise.get_future();// getting future object from promise object
 
-    std::thread t2(func);
+    std::thread t2(func);// calling func in i different thread 
     
     try
     {
-        double ans = Future.get();
+        double ans = Future.get();// get value from future object, set at promise object
         
         std::cout<< std::setprecision(ans)<< std::endl;
     }
